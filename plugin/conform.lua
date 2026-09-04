@@ -32,4 +32,4 @@ vim.keymap.set('n', '<leader>f', function()
     async = true,
     lsp_format = 'fallback',
   }
-end)
+end, { desc = '[F]ormat buffer' })

@@ -19,21 +19,23 @@ require('blink.cmp').setup {
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
   callback = function(event)
-    local map = function(keys, func, mode)
+    local map = function(keys, func, mode, opts)
       mode = mode or 'n'
-      vim.keymap.set(mode, keys, func, { buffer = event.buf })
+      opts = opts or {}
+      opts.buffer = event.buf
+      vim.keymap.set(mode, keys, func, opts)
     end
 
-    map('grn', vim.lsp.buf.rename)
-    map('gra', vim.lsp.buf.code_action, { 'n', 'x' })
-    map('grr', FzfLua.lsp_references)
-    map('gri', FzfLua.lsp_implementations)
-    map('grd', FzfLua.lsp_definitions)
-    map('grD', vim.lsp.buf.declaration)
-    map('gO', FzfLua.lsp_document_symbols)
-    map('gW', FzfLua.lsp_workspace_symbols)
-    map('grt', FzfLua.lsp_typedefs)
-    map('gl', vim.diagnostic.open_float)
+    map('grn', vim.lsp.buf.rename, 'n', { desc = 'LSP [R]e[N]ame' })
+    map('gra', vim.lsp.buf.code_action, { 'n', 'x' }, { desc = 'LSP [R]e[A]ction (code action)' })
+    map('grr', FzfLua.lsp_references, 'n', { desc = 'LSP [R]eferences' })
+    map('gri', FzfLua.lsp_implementations, 'n', { desc = 'LSP [R]e[I]mplementations' })
+    map('grd', FzfLua.lsp_definitions, 'n', { desc = 'LSP [R]e[D]efinitions' })
+    map('grD', vim.lsp.buf.declaration, 'n', { desc = 'LSP [R]e[D]eclaration' })
+    map('gsd', FzfLua.lsp_document_symbols, 'n', { desc = 'LSP [S]ymbol [D]ocument' })
+    map('gsw', FzfLua.lsp_workspace_symbols, 'n', { desc = 'LSP [S]ymbol [W]orkspace' })
+    map('grt', FzfLua.lsp_typedefs, 'n', { desc = 'LSP [T]ype definitions' })
+    map('gl', vim.diagnostic.open_float, 'n', { desc = 'Show line diagnostics' })
 
     local client = vim.lsp.get_client_by_id(event.data.client_id)
 
@@ -62,7 +64,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end
 
     if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf) then
-      map('<leader>th', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf }) end)
+      map(
+        '<leader>th',
+        function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf }) end,
+        'n',
+        { desc = '[T]oggle inlay [H]ints' }
+      )
     end
   end,
 })

@@ -9,6 +9,6 @@ require('mini.notify').setup { lsp_progress = { duration_last = 3000 } }
 
 vim.keymap.set('n', '<leader>e', function()
   if MiniFiles.close() == nil then MiniFiles.open(vim.api.nvim_buf_get_name(0)) end
-end)
+end, { desc = 'Toggle file explorer' })
 
-vim.keymap.set('n', '<leader>n', function() MiniNotify.show_history() end)
+vim.keymap.set('n', '<leader>n', function() MiniNotify.show_history() end, { desc = 'Show notification history' })
