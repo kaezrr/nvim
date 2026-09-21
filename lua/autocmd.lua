@@ -33,3 +33,15 @@ vim.api.nvim_create_autocmd('VimEnter', {
     FzfLua.files()
   end,
 })
+
+-- Set indent width to 2 on some specific file types
+vim.api.nvim_create_autocmd('FileType', {
+  group = vim.api.nvim_create_augroup('FileTypeIndent', { clear = true }),
+  pattern = { 'javascript', 'typescript', 'lua', 'html', 'css', 'json', 'yaml', 'nix' },
+  callback = function()
+    vim.opt_local.tabstop = 2
+    vim.opt_local.shiftwidth = 2
+    vim.opt_local.softtabstop = 2
+    vim.opt_local.expandtab = true
+  end,
+})

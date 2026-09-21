@@ -24,6 +24,7 @@ require('conform').setup {
     yaml = { 'prettier' },
     sql = { 'sql_formatter' },
     python = { 'ruff_format' },
+    nix = { 'nixfmt' },
   },
 }
 

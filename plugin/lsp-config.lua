@@ -161,4 +161,5 @@ vim.lsp.enable {
   'rust_analyzer',
   'wgsl_analyzer',
   'ty',
+  'nixd',
 }
