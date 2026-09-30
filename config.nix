@@ -39,11 +39,17 @@
     nvim-treesitter.withAllGrammars
   ];
 
-  extraBinPath = with pkgs; [
-    ripgrep
-    fd
-    fzf
-    chafa
-    git
-  ];
+  extraBinPath =
+    with pkgs;
+    [
+      ripgrep
+      fd
+      fzf
+      chafa
+      git
+    ]
+    ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux [
+      pkgs.wl-clipboard
+      pkgs.xclip
+    ];
 }

@@ -15,7 +15,7 @@
         default = neovim;
       }) nixpkgs.legacyPackages;
 
-      devshells = builtins.mapAttrs (system: pkgs: {
+      devShells = builtins.mapAttrs (system: pkgs: {
         default = pkgs.mkShell {
           packages = with pkgs; [
             lua-language-server
