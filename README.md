@@ -1,16 +1,16 @@
-# Neovim
+# Neovim ft. Nix
 
 My personal neovim configuration, can be used either as a nix flake or a regular configuration.
 
 ## Try it out with a single command
 ```sh
-nix run github:kaezrr/neovim
+nix run github:kaezrr/nvim
 ```
 
 ## Usage - Regular
 
 ```sh
-git clone https://github.com/kaezrr/neovim.git $XDG_CONFIG_HOME/nvim
+git clone https://github.com/kaezrr/nvim.git $XDG_CONFIG_HOME/nvim
 ```
 
 ## Usage - Nix Flake
@@ -22,7 +22,7 @@ Add this flake to your inputs and then install it as a system package.
 {
   inputs = {
     neovim = {
-      url = "github:kaezrr/neovim";
+      url = "github:kaezrr/nvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   }
