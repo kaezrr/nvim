@@ -47,6 +47,9 @@
       fzf
       chafa
       git
+
+      nixd
+      nixfmt
     ]
     ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux [
       pkgs.wl-clipboard
