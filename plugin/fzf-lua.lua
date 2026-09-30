@@ -9,4 +9,6 @@ vim.keymap.set('n', '<leader>sg', function() FzfLua.live_grep() end, { desc = '[
 vim.keymap.set('n', '<leader>sd', function() FzfLua.diagnostics_workspace() end, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sr', function() FzfLua.resume() end, { desc = '[S]earch [R]esume' })
 vim.keymap.set('n', '<leader><leader>', function() FzfLua.buffers() end, { desc = 'List buffers' })
-vim.keymap.set('n', '<leader>sn', function() FzfLua.files { cwd = vim.fn.stdpath 'config' } end, { desc = '[S]earch [N]eovim config files' })
+
+local config_dir = vim.g.nix and vim.g.flake_path or vim.fn.stdpath 'config'
+vim.keymap.set('n', '<leader>sn', function() FzfLua.files { cwd = config_dir } end, { desc = '[S]earch [N]eovim config files' })

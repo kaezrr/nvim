@@ -1,11 +1,8 @@
 { pkgs, lib, ... }:
-
+let
+  configDir = "~/Documents/nef";
+in
 {
-  aliases = [
-    "vi"
-    "vim"
-  ];
-
   plugins.dev.mnw = {
     pure = lib.fileset.toSource {
       root = ./.;
@@ -15,9 +12,13 @@
       ];
     };
 
+    impure = configDir;
   };
 
-  initLua = "vim.g.nix = true";
+  initLua = ''
+    vim.g.nix = true
+    vim.g.flake_path = "${configDir}";
+  '';
 
   luaFiles = [ ./init.lua ];
 

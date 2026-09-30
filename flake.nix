@@ -1,5 +1,5 @@
 {
-  description = "A very basic flake";
+  description = "My personal neovim flake";
 
   inputs = {
     nixpkgs.url = "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.zst";
@@ -11,8 +11,8 @@
 
     {
       packages = builtins.mapAttrs (system: pkgs: rec {
-        neovim = mnw.lib.wrap pkgs ./config.nix;
-        default = neovim;
+        nvim = mnw.lib.wrap pkgs ./config.nix;
+        default = nvim;
       }) nixpkgs.legacyPackages;
 
       devShells = builtins.mapAttrs (system: pkgs: {
@@ -23,5 +23,7 @@
           ];
         };
       }) nixpkgs.legacyPackages;
+
+      formatter = builtins.mapAttrs (system: pkgs: pkgs.nixfmt-tree) nixpkgs.legacyPackages;
     };
 }
