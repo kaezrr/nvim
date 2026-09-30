@@ -12,9 +12,8 @@
       eachSystem = f: builtins.mapAttrs (_: pkgs: f pkgs) nixpkgs.legacyPackages;
     in
     {
-      packages = eachSystem (pkgs: rec {
-        nvim = mnw.lib.wrap pkgs ./config.nix;
-        default = nvim;
+      packages = eachSystem (pkgs: {
+        default = mnw.lib.wrap pkgs ./config.nix;
       });
 
       devShells = eachSystem (pkgs: {
