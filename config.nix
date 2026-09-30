@@ -1,6 +1,6 @@
 { pkgs, lib, ... }:
 let
-  configDir = "~/Documents/nef";
+  configDir = "~/Documents/neovim";
 in
 {
   plugins.dev.mnw = {

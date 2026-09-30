@@ -8,22 +8,24 @@
 
   outputs =
     { nixpkgs, mnw, ... }:
-
+    let
+      eachSystem = f: builtins.mapAttrs (_: pkgs: f pkgs) nixpkgs.legacyPackages;
+    in
     {
-      packages = builtins.mapAttrs (system: pkgs: rec {
+      packages = eachSystem (pkgs: rec {
         nvim = mnw.lib.wrap pkgs ./config.nix;
         default = nvim;
-      }) nixpkgs.legacyPackages;
+      });
 
-      devShells = builtins.mapAttrs (system: pkgs: {
+      devShells = eachSystem (pkgs: {
         default = pkgs.mkShell {
           packages = with pkgs; [
             lua-language-server
             stylua
           ];
         };
-      }) nixpkgs.legacyPackages;
+      });
 
-      formatter = builtins.mapAttrs (system: pkgs: pkgs.nixfmt-tree) nixpkgs.legacyPackages;
+      formatter = eachSystem (pkgs: pkgs.nixfmt-tree);
     };
 }
