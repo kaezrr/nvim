@@ -17,16 +17,9 @@
 
   };
 
-  initLua = ''
-    -- [[ Setting options ]]
-    require 'options'
+  initLua = "vim.g.nix = true";
 
-    -- [[ Basic and high powered keybinds ]]
-    require 'keybinds'
-
-    -- [[ Auto commands ]]
-    require 'autocmd'
-  '';
+  luaFiles = [ ./init.lua ];
 
   plugins.start = with pkgs.vimPlugins; [
     kanagawa-nvim
@@ -51,13 +44,6 @@
     fd
     fzf
     chafa
-
-    # For working with config files
-    lua-language-server
-    stylua
-
-    # For working with nix files
-    nixfmt
-    nixd
+    git
   ];
 }

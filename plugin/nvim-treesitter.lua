@@ -14,7 +14,8 @@ vim.api.nvim_create_autocmd('FileType', {
 
     if not language then return end
 
-    local installed_parsers = require('nvim-treesitter').get_installed 'parsers'
+    -- If this is managed by nix then all grammars are already installed
+    local installed_parsers = vim.g.nix and available_parsers or require('nvim-treesitter').get_installed 'parsers'
 
     if vim.tbl_contains(installed_parsers, language) then
       treesitter_try_attach(buf, language)
@@ -26,20 +27,21 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
-require('nvim-treesitter').install {
-  'bash',
-  'fish',
-  'c',
-  'cpp',
-  'diff',
-  'lua',
-  'luadoc',
-  'markdown',
-  'markdown_inline',
-  'query',
-  'vim',
-  'vimdoc',
-  'rust',
-  'wgsl',
-  'toml',
-}
+if not vim.g.nix then
+  require('nvim-treesitter').install {
+    'bash',
+    'fish',
+    'c',
+    'cpp',
+    'diff',
+    'lua',
+    'luadoc',
+    'markdown',
+    'markdown_inline',
+    'query',
+    'vim',
+    'vimdoc',
+    'rust',
+    'toml',
+  }
+end

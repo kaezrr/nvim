@@ -14,5 +14,14 @@
         neovim = mnw.lib.wrap pkgs ./config.nix;
         default = neovim;
       }) nixpkgs.legacyPackages;
+
+      devshells = builtins.mapAttrs (system: pkgs: {
+        default = pkgs.mkShell {
+          packages = with pkgs; [
+            lua-language-server
+            stylua
+          ];
+        };
+      }) nixpkgs.legacyPackages;
     };
 }
