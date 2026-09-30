@@ -1,10 +1,3 @@
-vim.pack.add {
-  {
-    src = 'https://github.com/nvim-treesitter/nvim-treesitter',
-    branch = 'main',
-  },
-}
-
 local function treesitter_try_attach(buf, language)
   if not vim.treesitter.language.add(language) then return end
 
