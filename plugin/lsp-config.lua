@@ -154,5 +154,5 @@ vim.lsp.enable {
   'wgsl_analyzer',
   'ty',
   'nixd',
-  'vtsls',
+  'biome',
 }
