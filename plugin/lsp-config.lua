@@ -155,4 +155,5 @@ vim.lsp.enable {
   'ty',
   'nixd',
   'biome',
+  'slangd',
 }
